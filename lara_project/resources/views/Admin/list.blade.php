@@ -12,6 +12,9 @@
       <div class="card">
         <div class="card-header">
           <h4 class="card-title"> Admin Table</h4>
+          <a href="/superadmin/clientcreate" class="btn submit" style="background-color: rgb(9, 196, 9)">
+            <i class="now-ui-icons ui-1_simple-add"></i>
+            ADD</a>
           @if(session('msg'))
           <div class="alert alert-success" role="alert">
             {{session('msg')}}
@@ -20,15 +23,17 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Country</th>
-                <th>Type</th>
-                <th>EDIT</th>
-                <th>DELETE</th>
+            <table class="table table-dark table-borderless">
+              <thead style="font: bold">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">City</th>
+                <th scope="col">Country</th>
+                <th scope="col">Type</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Action</th>
+
                </thead>
 
            <tbody>
@@ -37,13 +42,14 @@
                 <td> {{$ad->ad_Id}} </td>
                 <td> {{$ad->ad_name}} </td>
                 <td> {{$ad->ad_email}}</td>
+                <td> {{$ad->city}}</td>
                 <td> {{$ad->country}} </td>
                 <td> {{$ad->usertype}} </td>
+                <td> {{$ad->salary}} </td>
                 <td>
                  <a href="/superadmin/adminedit/{{$ad->ad_Id}}" class="btn submit" style="background-color: rgb(9, 196, 9)" >EDIT</a>
-              </td>
-                <td>
-                  <a href="#" class="btn submit" style="background-color: red">Delete</a>
+
+                  <a href="/admin/delete/{{$ad->ad_Id}}" class="btn submit" style="background-color: red">Delete</a>
                 </td>
               </tr>
                @endforeach
@@ -59,5 +65,12 @@
 @endsection
 
 @section('scripts')
-
+ {{-- <script>
+     $(document).ready( function () {
+    $('#datatable').DataTable();
+} );
+ </script> --}}
 @endsection
+
+
+

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
+use App\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ClientRequest;
+use Validator;
 
-
-class SuperHomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +16,7 @@ class SuperHomeController extends Controller
      */
     public function index()
     {
-
-
-        return view('Superadmin.dashboard');
-        // return view('Superadmin.index');
-    }
-    public function admin()
-    {
-        return view('Admin.index');
-    }
-    public function adminlist()
-    {
-        $admin = Admin::all();
-        return view('Admin.list')->with('ad_list' , $admin);
+        //
     }
 
     /**
@@ -38,7 +26,13 @@ class SuperHomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('Client.clientcreate');
+    }
+
+    public function clientlist()
+    {
+        $client = Client::all();
+       return view('Client.clist')->with('client', $client);
     }
 
     /**
@@ -47,9 +41,21 @@ class SuperHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $req)
     {
-        //
+        $client = new Client();
+
+        $client->clientname  = $req->clientname;
+        $client->clientemail = $req->clientemail;
+        $client->clientpassword = $req->clientpassword;
+        $client->address     = $req->address;
+        $client->country     = $req->country;
+        $client->salary      = $req->salary;
+        $client->type        = $req->type;
+
+        $client->save();
+        $req->session()-> flash('msg', 'New User Added');
+        return redirect('/superadmin/clientlist');
     }
 
     /**
@@ -60,7 +66,7 @@ class SuperHomeController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -71,8 +77,8 @@ class SuperHomeController extends Controller
      */
     public function edit($id)
     {
-       $ad = Admin::find($id);
-       return view('Admin.adminedit')->with('ad', $ad);
+        $client = Client::find($id);
+        return view('Client.clientedit')->with('client', $client);
     }
 
     /**
@@ -84,16 +90,18 @@ class SuperHomeController extends Controller
      */
     public function update(Request $req, $id)
     {
-        $ad = Admin::find($id);
+        $client = Client::find($id);
 
-        $ad->ad_name = $req->ad_name;
-        $ad->ad_email = $req->ad_email;
-        $ad->ad_password = $req->ad_password;
-        $ad->usertype = $req->usertype;
+        $client->clientname  = $req->clientname;
+        $client->clientemail = $req->clientemail;
+        $client->address     = $req->address;
+        $client->country     = $req->country;
+        $client->salary      = $req->salary;
+        $client->type        = $req->type;
 
-        $ad->save();
+        $client->save();
         $req->session()-> flash('msg', 'Your Data is Upadted');
-        return redirect('/superadmin/adminlist');
+        return redirect('/superadmin/clientlist');
     }
 
     /**
@@ -102,15 +110,8 @@ class SuperHomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
-    {
-        $admin = Admin::find($id);
-        return view('Admin.delete');
-    }
-
     public function destroy($id)
     {
-        $admin = Admin::destroy($id);
-        return redirect('/superadmin/adminlist');
+        //
     }
 }

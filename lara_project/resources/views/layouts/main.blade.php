@@ -18,6 +18,10 @@
   <link href="{{asset('/assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{asset('/assets/demo/demo.css')}}" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{asset('assets/css/datatable.min.css')}}">
+
+
 </head>
 
 <body class="">
@@ -31,9 +35,9 @@
           Creative Tim
         </a>
       </div>
-      <div class="sidebar-wrapper" id="sidebar-wrapper">
+      <div class="sidebar-wrapper" id="sidebar-wrapper" >
         <ul class="nav">
-          <li>
+          <li class="{{ 'superadmin/dashboard' == request()->path() ? 'active' : ''}}" >
             <a href="/superadmin/dashboard">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
@@ -57,13 +61,19 @@
               <p>Notifications</p>
             </a>
           </li>
-          <li>
+          <li class="{{ 'superadmin/adminlist' == request()->path() ? 'active' : ''}}" >
             <a href="/superadmin/adminlist">
               <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>Admin Profile</p>
             </a>
           </li>
-          <li class="active ">
+          <li class="{{ 'superadmin/clientlist' == request()->path() ? 'active' : ''}}">
+            <a href="/superadmin/clientlist">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>Client Profile</p>
+            </a>
+          </li>
+          <li >
             <a href="./tables.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>Table List</p>
@@ -146,9 +156,11 @@
                 </a>
               </li>
             </ul>
+           {{--  <i class="now-ui-icons ui-1_simple-add"></i> --}}
           </div>
         </div>
       </nav>
+
       <!-- End Navbar -->
 
 
@@ -197,6 +209,7 @@
   <script src="{{asset('/assets/js/core/popper.min.js')}}"></script>
   <script src="{{asset('/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+   <script src="{{asset('assets/js/datatable.min.js')}}"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chart JS -->
