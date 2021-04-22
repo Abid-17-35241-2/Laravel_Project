@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Requests\AdminRequest;
 
 class SuperHomeController extends Controller
 {
@@ -38,7 +38,7 @@ class SuperHomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.admincreate');
     }
 
     /**
@@ -47,9 +47,22 @@ class SuperHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminRequest $req)
     {
-        //
+
+        $admin = new Admin();
+
+        $admin->ad_name     = $req->ad_name;
+        $admin->ad_email    = $req->ad_email;
+        $admin->ad_password = $req->ad_password;
+        $admin->city        = $req->city;
+        $admin->country     = $req->country;
+        $admin->salary      = $req->salary;
+        $admin->type        = $req->type;
+
+        $admin->save();
+        $req->session()-> flash('msg', 'New Admin Added');
+        return redirect('/superadmin/adminlist');
     }
 
     /**
@@ -89,7 +102,7 @@ class SuperHomeController extends Controller
         $ad->ad_name = $req->ad_name;
         $ad->ad_email = $req->ad_email;
         $ad->ad_password = $req->ad_password;
-        $ad->usertype = $req->usertype;
+        $ad->type = $req->type;
 
         $ad->save();
         $req->session()-> flash('msg', 'Your Data is Upadted');

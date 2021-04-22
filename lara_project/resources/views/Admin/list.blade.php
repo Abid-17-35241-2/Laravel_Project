@@ -3,6 +3,8 @@
 
 @section('title')
     List
+
+
 @endsection
 
 
@@ -12,7 +14,8 @@
       <div class="card">
         <div class="card-header">
           <h4 class="card-title"> Admin Table</h4>
-          <a href="/superadmin/clientcreate" class="btn submit" style="background-color: rgb(9, 196, 9)">
+
+          <a href="/superadmin/admincreate" class="btn submit" style="background-color: rgb(9, 196, 9)">
             <i class="now-ui-icons ui-1_simple-add"></i>
             ADD</a>
           @if(session('msg'))
@@ -23,8 +26,8 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-dark table-borderless">
-              <thead style="font: bold">
+            <table id="datatables" class="table table-dark table-borderless">
+              <thead >
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
@@ -44,7 +47,7 @@
                 <td> {{$ad->ad_email}}</td>
                 <td> {{$ad->city}}</td>
                 <td> {{$ad->country}} </td>
-                <td> {{$ad->usertype}} </td>
+                <td> {{$ad->type}} </td>
                 <td> {{$ad->salary}} </td>
                 <td>
                  <a href="/superadmin/adminedit/{{$ad->ad_Id}}" class="btn submit" style="background-color: rgb(9, 196, 9)" >EDIT</a>
@@ -65,12 +68,13 @@
 @endsection
 
 @section('scripts')
- {{-- <script>
+ <script>
      $(document).ready( function () {
-    $('#datatable').DataTable();
+    $('#datatables').DataTable();
 } );
- </script> --}}
-@endsection
+ </script>
+
+ @endsection
 
 
 

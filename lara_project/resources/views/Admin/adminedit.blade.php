@@ -36,9 +36,9 @@
 
               <div class="form-group">
                 <label>Role </label>
-                <select name="usertype">
-                    <option value="admin" @if ($ad['usertype'] == 'admin') selected @endif >ADMIN</option>
-                    <option value="user" @if ($ad['usertype'] == 'user') selected @endif >USER</option>
+                <select name="type">
+                    <option value="admin" @if ($ad['type'] == 'admin') selected @endif >ADMIN</option>
+                    <option value="user" @if ($ad['type'] == 'user') selected @endif >USER</option>
 
                 </select>
               </div>

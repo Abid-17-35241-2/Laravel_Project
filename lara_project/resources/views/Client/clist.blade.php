@@ -9,7 +9,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-      <div class="card">
+      <div class="card" style="font: bold">
         <div class="card-header">
           <h4 class="card-title"> Client List</h4>
           @if(session('msg'))
@@ -18,10 +18,11 @@
            </div>
         @endif
          </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
+        <div class="card-body" >
+          <div class="">
+            <table id="datatable" class="table table-dark" >
+
+              <thead class="">
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -69,5 +70,9 @@
 @endsection
 
 @section('scripts')
+ <script>
+     var table = $('#datatable').DataTable();
+
+ </script>
 
 @endsection
